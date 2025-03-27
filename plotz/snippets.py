@@ -9,7 +9,7 @@ WIDTH_MAP = {
     'dissertation': 394.35527,
 }
 
-COLORMAP = ['#E41A1C','#377eb8','#984ea3','#ff7f00','#cccc33','#f781bf','#4daf4a', '#a65628', '#706f6f']
+COLORMAP = ['#e82e82','#009ee3','#984ea3','#ff7f00','#ffbc29','#f781bf','#35cdb4', '#a65628', '#706f6f']
 COLORS = objectview({
     'red': COLORMAP[0],
     'blue': COLORMAP[1],
