@@ -42,7 +42,10 @@ def default_plot(height_fraction=1.0, width_fraction=1.0, subplots=None, sharex=
         # Use LaTeX to write all text
         'text.usetex': True,
         'font.family': 'serif',
-        'text.latex.preamble': r'\usepackage{amsmath}\n\usepackage{amsfonts}\n\usepackage{bm}',
+        'text.latex.preamble': r'''
+            \usepackage{amsmath}
+            \usepackage{amsfonts}
+            \usepackage{bm}''',
         'axes.prop_cycle': f'cycler("color", {COLORMAP})',
         # Use 10pt font in plots, to match 10pt font in document
         'axes.labelsize': 8,
