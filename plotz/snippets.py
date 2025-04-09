@@ -7,6 +7,7 @@ class objectview(object):
 
 WIDTH_MAP = {
     'dissertation': 394.35527,
+    'ieeeaccess': 505.12177,
 }
 
 COLORMAP = ['#e82e82','#009ee3','#984ea3','#ff7f00','#ffbc29','#f781bf','#35cdb4', '#a65628', '#706f6f']
@@ -74,14 +75,16 @@ def default_plot_mosaic(height_fraction=1.0, width_fraction=1.0, subplots=None, 
 
     return plt.subplot_mosaic(mosaic=subplots, figsize=(fig_width_inch, fig_height_inch), sharex=sharex, sharey=sharey)
 
-def default_plot(height_fraction=1.0, width_fraction=1.0, subplots=None, sharex=False, sharey=False, style='dissertation'):
+def default_plot(height_fraction=1.0, width_fraction=1.0, subplots=None, sharex=False, sharey=False, single_column=True, style='dissertation'):
     width_pt = WIDTH_MAP[style]
     width_pt *= width_fraction
 
     if subplots is None:
         subplots = (1, 1)
 
-    fig_width_inch = width_pt * inches_per_pt
+    column_frac = 1 if single_column else 0.5
+
+    fig_width_inch = width_pt * inches_per_pt * column_frac
     fig_height_inch = height_fraction * fig_width_inch * golden_ratio * (subplots[0] / subplots[1])
 
     plt.rcParams.update(tex_fonts)
