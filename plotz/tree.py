@@ -60,6 +60,7 @@ class _BaseTreeExporter:
         self.class_names = class_names
         self.label = label
         self.filled = filled
+        self.fill_colors=fill_colors
         self.impurity = impurity
         self.node_ids = node_ids
         self.proportion = proportion
