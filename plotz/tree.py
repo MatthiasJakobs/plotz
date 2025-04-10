@@ -60,7 +60,7 @@ class _BaseTreeExporter:
         self.class_names = class_names
         self.label = label
         self.filled = filled
-        self.fill_colors=fill_colors
+        self.fill_colors = fill_colors
         self.impurity = impurity
         self.node_ids = node_ids
         self.proportion = proportion
@@ -209,6 +209,7 @@ class _MPLTreeExporter(_BaseTreeExporter):
         class_names=None,
         label="all",
         filled=False,
+        fill_colors=None,
         impurity=True,
         node_ids=False,
         proportion=False,
@@ -222,6 +223,7 @@ class _MPLTreeExporter(_BaseTreeExporter):
             class_names=class_names,
             label=label,
             filled=filled,
+            fill_colors=fill_colors,
             impurity=impurity,
             node_ids=node_ids,
             proportion=proportion,
