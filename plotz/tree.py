@@ -1,6 +1,6 @@
 # Extension of https://github.com/scikit-learn/scikit-learn/blob/98ed9dc73a86f5f11781a0e21f24c8f47979ec67/sklearn/tree/_export.py#L71
 
-from snippets import COLORS, default_plot
+from .snippets import COLORS, default_plot
 import numpy as np
 from sklearn.tree import _criterion, _tree
 from sklearn.tree._reingold_tilford import Tree, buchheim
