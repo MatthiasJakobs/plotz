@@ -1,3 +1,5 @@
+import numpy as np
+import matplotlib.colors as mc
 import matplotlib.pyplot as plt 
 
 # Helper class for easy object access
@@ -90,3 +92,11 @@ def default_plot(height_fraction=1.0, width_fraction=1.0, subplots=None, sharex=
     plt.rcParams.update(tex_fonts)
 
     return plt.subplots(subplots[0], subplots[1], figsize=(fig_width_inch, fig_height_inch), sharex=sharex, sharey=sharey)
+
+# Similar to tikz / pgfplot
+def mix_with_white(color, percent=0.5):
+    base_rgb = np.array(mc.to_rgb(color))
+    white_rgb = np.array([1, 1, 1])
+    mixed = (1-percent) * base_rgb + percent * white_rgb
+    return tuple(mixed)
+
