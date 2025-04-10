@@ -349,6 +349,7 @@ class _MPLTreeExporter(_BaseTreeExporter):
             **common_kwargs,
         )
         kwargs["arrowprops"]["edgecolor"] = plt.rcParams["text.color"]
+        kwargs["arrowprops"]["fc"] = 'black'
 
         # offset things by .5 to center them in plot
         xy = ((node.x + 0.5) / max_x, (max_y - node.y - 0.5) / max_y)
