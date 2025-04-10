@@ -1,6 +1,6 @@
 # Extension of https://github.com/scikit-learn/scikit-learn/blob/98ed9dc73a86f5f11781a0e21f24c8f47979ec67/sklearn/tree/_export.py#L71
 
-from .snippets import COLORS, default_plot
+from .snippets import COLORMAP
 import numpy as np
 from sklearn.tree import _criterion, _tree
 from sklearn.tree._reingold_tilford import Tree, buchheim
@@ -13,6 +13,7 @@ def plot_tree(
     class_names=None,
     label="all",
     filled=False,
+    fill_colors=None,
     impurity=True,
     node_ids=False,
     proportion=False,
@@ -27,6 +28,7 @@ def plot_tree(
         class_names=class_names,
         label=label,
         filled=filled,
+        fill_colors=fill_colors,
         impurity=impurity,
         node_ids=node_ids,
         proportion=proportion,
@@ -45,6 +47,7 @@ class _BaseTreeExporter:
         class_names=None,
         label="all",
         filled=False,
+        fill_colors=None,
         impurity=True,
         node_ids=False,
         proportion=False,
@@ -63,37 +66,18 @@ class _BaseTreeExporter:
         self.rounded = rounded
         self.precision = precision
         self.fontsize = fontsize
-
-    def get_color(self, value):
-        # Find the appropriate color & intensity for a node
-        if self.colors["bounds"] is None:
-            # Classification tree
-            color = list(self.colors["rgb"][np.argmax(value)])
-            sorted_values = sorted(value, reverse=True)
-            if len(sorted_values) == 1:
-                alpha = 0.0
-            else:
-                alpha = (sorted_values[0] - sorted_values[1]) / (1 - sorted_values[1])
-        else:
-            # Regression tree or multi-output
-            color = list(self.colors["rgb"][0])
-            alpha = (value - self.colors["bounds"][0]) / (
-                self.colors["bounds"][1] - self.colors["bounds"][0]
-            )
-        # compute the color as alpha against white
-        color = [int(round(alpha * c + (1 - alpha) * 255, 0)) for c in color]
-        # Return html color code in #RRGGBB format
-        return "#%2x%2x%2x" % tuple(color)
+        self.fill_colors = fill_colors
 
     def get_fill_color(self, tree, node_id):
         is_leaf = tree.children_left[node_id] == - 1
+        # TODO: Only classification 
         class_idx = np.argmax(tree.value[node_id])
-
-        if is_leaf:
-            # TODO: Only two classes at the moment
-            return [COLORS.blue, COLORS.red][class_idx]
-        else:
+        if not is_leaf:
             return 'white'
+        if self.fill_colors is not None:
+            return self.fill_colors[class_idx]
+        else:
+            return COLORMAP[class_idx % len(COLORMAP)]
 
     def node_to_str(self, tree, node_id, criterion):
         # Generate the node content string
