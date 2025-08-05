@@ -10,6 +10,7 @@ class objectview(object):
 WIDTH_MAP = {
     'dissertation': 394.35527,
     'ieeeaccess': 505.12177,
+    'lncs': 372.0,
 }
 
 COLORMAP = ['#e82e82','#009ee3','#984ea3','#ff7f00','#ffbc29','#f781bf','#35cdb4', '#a65628', '#706f6f']
